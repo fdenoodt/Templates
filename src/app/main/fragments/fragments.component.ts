@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { products } from './products';
 
 @Component({
   selector: 'app-fragments',
@@ -7,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FragmentsComponent implements OnInit {
 
+  public gridData: any[] = products;
   constructor() { }
 
   ngOnInit() {

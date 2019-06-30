@@ -6,6 +6,10 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { FragmentsComponent } from './fragments/fragments.component';
 import { FragmentComponent } from './fragment/fragment.component';
 
+import { GridModule } from '@progress/kendo-angular-grid';
+import { ToolBarModule } from '@progress/kendo-angular-toolbar';
+import { EditorModule } from '@progress/kendo-angular-editor';
+
 
 @NgModule({
   declarations: [
@@ -14,7 +18,10 @@ import { FragmentComponent } from './fragment/fragment.component';
     FragmentsComponent],
   imports: [
     CommonModule,
-    MainRoutingModule
+    MainRoutingModule,
+    GridModule,
+    ToolBarModule,
+    EditorModule
   ],
   exports: [
     SidebarComponent, FragmentsComponent, FragmentComponent, MainRoutingModule

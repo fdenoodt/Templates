@@ -7,6 +7,8 @@ import { StartComponent } from './start/start.component';
 import { SignInComponent } from './signin/signin.component';
 import { MainComponent } from './main/main.component';
 
+import { MainModule } from './main/main.module'
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -16,7 +18,8 @@ import { MainComponent } from './main/main.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MainModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

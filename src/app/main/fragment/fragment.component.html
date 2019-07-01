@@ -1,1 +1,7 @@
-<kendo-editor [value]="value"></kendo-editor>
+<div>
+  <kendo-textbox-container floatingLabel="Title">
+    <input kendoTextBox [(ngModel)]="fragment.title" />
+  </kendo-textbox-container>
+
+  <kendo-editor [value]="fragment.text"></kendo-editor>
+</div>

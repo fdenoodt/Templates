@@ -1,4 +1,4 @@
 <div fxLayout="row" fxLayoutAlign="space-between">
   <app-sidebar fxFlex="200px" (selectionChanged)='fragmentsRequested($event)'></app-sidebar>
-  <app-fragments [pageId]='selectedFragmentPage'></app-fragments>
+  <app-fragments fxFlex="grow" *ngIf="selectedFragmentPage > 0" [pageId]='selectedFragmentPage'></app-fragments>
 </div>

@@ -3,5 +3,8 @@
     <input kendoTextBox [(ngModel)]="fragment.title" />
   </kendo-textbox-container>
 
-  <kendo-editor [value]="fragment.text"></kendo-editor>
+  <kendo-textbox-container floatingLabel="Content">
+    <textarea kendoTextArea [(ngModel)]="fragment.text"></textarea>
+  </kendo-textbox-container>
+
 </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { products } from './products';
 
 @Component({
@@ -6,12 +6,17 @@ import { products } from './products';
   templateUrl: './fragments.component.html',
   styleUrls: ['./fragments.component.scss']
 })
-export class FragmentsComponent implements OnInit {
+export class FragmentsComponent implements OnInit, OnChanges {
 
   public gridData: any[] = products;
+  @Input() pageId: number;
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  ngOnChanges(): void {
   }
 
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { sampleFragments } from '../fragments';
 
 @Component({
@@ -11,6 +11,8 @@ export class SidebarComponent implements OnInit {
   public data: any[] = sampleFragments;
   public selectedKeys: any[] = [];
 
+  @Output() selectionChanged: EventEmitter<number> = new EventEmitter<number>();
+
   constructor() { }
 
   ngOnInit() {
@@ -18,6 +20,7 @@ export class SidebarComponent implements OnInit {
 
   public handleSelection({ dataItem }: any): void {
     const id = dataItem.id;
+    this.selectionChanged.emit(id);
   }
 
 }

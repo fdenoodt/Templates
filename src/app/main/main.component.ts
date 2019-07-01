@@ -7,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainComponent implements OnInit {
 
+  public selectedFragmentPage = 0;
   constructor() { }
 
   ngOnInit() {
+  }
+
+  fragmentsRequested(id: number): void {
+    this.selectedFragmentPage = id;
   }
 
 }

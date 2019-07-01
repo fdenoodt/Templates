@@ -22,7 +22,7 @@ export class FragmentService {
     if (handleError.error instanceof ErrorEvent) {
       errMsg = `err ${handleError.error.message}`;
     } else {
-      errMsg = `srv ret ${handleError.status}`;
+      errMsg = `Something went wrong on the serverside, Error status: ${handleError.status}`;
     }
     return throwError(errMsg);
   }

@@ -11,7 +11,7 @@ import { IFragment } from '../fragment';
 export class SidebarComponent implements OnInit {
   public data: IFragment[] = [];
   public selectedKeys: any[] = [];
-  private errorMessage: string;
+  public errorMessage: string;
 
 
   @Output() selectionChanged: EventEmitter<number> = new EventEmitter<number>();

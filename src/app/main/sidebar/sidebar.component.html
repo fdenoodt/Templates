@@ -1,3 +1,7 @@
+<p *ngIf="errorMessage != null">
+  {{ errorMessage }}
+</p>
+
 <kendo-treeview [nodes]="data" textField="text" kendoTreeViewExpandable kendoTreeViewSelectable
   kendoTreeViewHierarchyBinding childrenField="items" (selectionChange)="handleSelection($event)"
   [(selectedKeys)]="selectedKeys">

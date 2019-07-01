@@ -1,10 +1,10 @@
 <div>
-  <kendo-textbox-container floatingLabel="Title">
+  <kendo-textbox-container class="input" floatingLabel="Title">
     <input kendoTextBox [(ngModel)]="fragment.title" />
   </kendo-textbox-container>
-
-  <kendo-textbox-container floatingLabel="Content">
-    <textarea kendoTextArea [(ngModel)]="fragment.text"></textarea>
+  <br>
+  <kendo-textbox-container class="input" floatingLabel="Content">
+    <textarea kendoTextArea [autoSize]="true" [(ngModel)]="fragment.text"></textarea>
   </kendo-textbox-container>
-
+  <button>Copy</button>
 </div>

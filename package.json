@@ -104,6 +104,7 @@
     "@progress/kendo-angular-treeview": "^4.0.0",
     "@progress/kendo-data-query": "^1.5.1",
     "@progress/kendo-drawing": "^1.5.12",
-    "@progress/kendo-theme-default": "^3.7.0"
+    "@progress/kendo-theme-default": "^3.7.0",
+    "@progress/kendo-theme-material": "^2.5.2"
   }
 }

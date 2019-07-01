@@ -85,6 +85,8 @@
   },
   "dependencies": {
     "@angular/animations": "^8.0.3",
+    "@angular/cdk": "^8.0.1",
+    "@angular/flex-layout": "^8.0.0-beta.26",
     "@progress/kendo-angular-buttons": "^5.0.0",
     "@progress/kendo-angular-common": "^1.0.0",
     "@progress/kendo-angular-dateinputs": "^4.0.0",
@@ -99,6 +101,7 @@
     "@progress/kendo-angular-pdf-export": "^2.0.0",
     "@progress/kendo-angular-popup": "^3.0.0",
     "@progress/kendo-angular-toolbar": "^2.0.0",
+    "@progress/kendo-angular-treeview": "^4.0.0",
     "@progress/kendo-data-query": "^1.5.1",
     "@progress/kendo-drawing": "^1.5.12",
     "@progress/kendo-theme-default": "^3.7.0"

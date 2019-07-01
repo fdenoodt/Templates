@@ -4,7 +4,6 @@
   </kendo-textbox-container>
   <br>
   <kendo-textbox-container class="input" floatingLabel="Content">
-    <textarea kendoTextArea [autoSize]="true" [(ngModel)]="fragment.text"></textarea>
+    <textarea kendoTextArea [autoSize]="true" [(ngModel)]="fragment.content" (click)="click($event)"></textarea>
   </kendo-textbox-container>
-  <button>Copy</button>
 </div>

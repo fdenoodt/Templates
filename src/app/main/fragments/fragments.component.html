@@ -3,6 +3,9 @@
 </p>
 
 
+<h1>
+  {{fragmentPage?.text}}
+</h1>
 <div *ngFor="let el of fragmentPage?.items">
   <app-fragment [fragment]="el"></app-fragment>
 </div>

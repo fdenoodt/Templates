@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { sampleFragments } from '../fragments';
 
 @Component({
   selector: 'app-sidebar',
@@ -6,25 +7,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit {
-  
-  public splitButtonData: Array<any> = [{
-    text: 'Option 1'
-  }, {
-    text: 'Option 2',
-  }, {
-    text: 'Option 3',
-  }];
+  public true = true;
+  public data: any[] = sampleFragments;
+  public selectedKeys: any[] = [];
 
-  public dropdownButtonData: Array<any> = [{
-    text: 'Option 1'
-  }, {
-    text: 'Option 2',
-  }, {
-    text: 'Option 3',
-  }];
   constructor() { }
 
   ngOnInit() {
+  }
+
+  public handleSelection({ dataItem }: any): void {
+    const id = dataItem.id;
   }
 
 }

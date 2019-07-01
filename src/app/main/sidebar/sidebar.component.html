@@ -1,14 +1,4 @@
-<kendo-toolbar>
-  <kendo-toolbar-button [text]="'Button'"></kendo-toolbar-button>
-  <kendo-toolbar-button [text]="'Toggle'" [toggleable]="true"></kendo-toolbar-button>
-  <kendo-toolbar-splitbutton [text]="'Split Button'" [data]="splitButtonData">
-  </kendo-toolbar-splitbutton>
-  <kendo-toolbar-dropdownbutton [text]="'DropDownButton'" [data]="dropdownButtonData">
-  </kendo-toolbar-dropdownbutton>
-  <kendo-toolbar-buttongroup [selection]="'single'">
-    <kendo-toolbar-button [toggleable]="true" [icon]="'align-left'"></kendo-toolbar-button>
-    <kendo-toolbar-button [toggleable]="true" [icon]="'align-center'"></kendo-toolbar-button>
-    <kendo-toolbar-button [toggleable]="true" [icon]="'align-right'"></kendo-toolbar-button>
-    <kendo-toolbar-button [toggleable]="true" [icon]="'align-justify'"></kendo-toolbar-button>
-  </kendo-toolbar-buttongroup>
-</kendo-toolbar>
+<kendo-treeview [nodes]="data" [isExpanded]="t" textField="text" kendoTreeViewExpandable kendoTreeViewSelectable
+  kendoTreeViewHierarchyBinding childrenField="items" (selectionChange)="handleSelection($event)"
+  [(selectedKeys)]="selectedKeys">
+</kendo-treeview>

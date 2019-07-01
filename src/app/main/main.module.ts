@@ -9,7 +9,7 @@ import { FragmentComponent } from './fragment/fragment.component';
 import { GridModule } from '@progress/kendo-angular-grid';
 import { ToolBarModule } from '@progress/kendo-angular-toolbar';
 import { EditorModule } from '@progress/kendo-angular-editor';
-
+import { TreeViewModule } from '@progress/kendo-angular-treeview';
 
 @NgModule({
   declarations: [
@@ -21,7 +21,8 @@ import { EditorModule } from '@progress/kendo-angular-editor';
     MainRoutingModule,
     GridModule,
     ToolBarModule,
-    EditorModule
+    EditorModule,
+    TreeViewModule
   ],
   exports: [
     SidebarComponent, FragmentsComponent, FragmentComponent, MainRoutingModule

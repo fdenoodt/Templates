@@ -7,12 +7,11 @@ import { StartComponent } from './start/start.component';
 import { SignInComponent } from './signin/signin.component';
 import { MainComponent } from './main/main.component';
 
-import { MainModule } from './main/main.module'
+import { MainModule } from './main/main.module';
 
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 
 
@@ -29,6 +28,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppRoutingModule,
     MainModule,
     BrowserAnimationsModule,
+    FlexLayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent]

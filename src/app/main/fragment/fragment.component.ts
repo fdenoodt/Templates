@@ -10,6 +10,7 @@ import { ClipboardService } from 'ngx-clipboard';
 export class FragmentComponent implements OnInit, OnChanges {
 
   @Input() fragment: IFragment;
+  copied: Boolean = false;
 
   constructor(private _clipboardService: ClipboardService) { }
 
@@ -19,10 +20,13 @@ export class FragmentComponent implements OnInit, OnChanges {
   ngOnChanges(): void {
   }
 
-  click(event: MouseEvent): void {
+  copy(event: MouseEvent): void {
     if (event.ctrlKey === true) {
-      console.log('hi', this.fragment.content);
       this._clipboardService.copyFromContent(this.fragment.content);
+      this.copied = true;
+      setTimeout(() => {
+        this.copied = false;
+      }, 1000);
     }
   }
 

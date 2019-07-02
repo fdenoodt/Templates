@@ -1,4 +1,9 @@
-<div fxLayout="row" fxLayoutAlign="space-between">
-  <app-sidebar fxFlex="200px" (selectionChanged)='fragmentsRequested($event)'></app-sidebar>
-  <app-fragments fxFlex="grow" *ngIf="selectedFragmentPage > 0" [pageId]='selectedFragmentPage'></app-fragments>
+<div fxLayoutAlign="stretch" class="main">
+  <app-sidebar class="sidebar" fxFlex="10em" (selectionChanged)='fragmentsRequested($event)'></app-sidebar>
+  <app-fragments fxFlex="100%" *ngIf="selectedFragmentPage > 0" [pageId]='selectedFragmentPage'></app-fragments>
+  <div class="centervh" fxFlex="100%" *ngIf="selectedFragmentPage <= 0">
+    <p fxLayoutAlign="center center">
+      Select an element in the sidebar.
+    </p>
+  </div>
 </div>

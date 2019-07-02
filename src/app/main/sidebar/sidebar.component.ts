@@ -34,6 +34,8 @@ export class SidebarComponent implements OnInit {
       const id = dataItem.id;
       this.selectionChanged.emit(id);
     } else { // Open directory
+      this.selectionChanged.emit(0);
+
       if (this.expandedKeys.includes(index)) {
         this.expandedKeys.splice(this.expandedKeys.indexOf(index), 1);
       } else {

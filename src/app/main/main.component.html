@@ -1,5 +1,8 @@
 <div fxLayoutAlign="stretch" class="main">
-  <app-sidebar class="sidebar" fxFlex="10em" (selectionChanged)='fragmentsRequested($event)'></app-sidebar>
+  <div class="sidebarOverlay" fxFlex="14em">
+    <app-sidebar class="sidebar" fxFlex="14em" (selectionChanged)='fragmentsRequested($event)'></app-sidebar>
+  </div>
+
   <app-fragments fxFlex="100%" *ngIf="selectedFragmentPage > 0" [pageId]='selectedFragmentPage'></app-fragments>
   <div class="centervh" fxFlex="100%" *ngIf="selectedFragmentPage <= 0">
     <p fxLayoutAlign="center center">

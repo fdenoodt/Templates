@@ -7,10 +7,14 @@
     <textarea kendoTextArea [autoSize]="true" [(ngModel)]="fragment.content" (click)="copy($event)"></textarea>
   </kendo-textbox-container>
 
-  <!-- <span class="copied">
-    Copied
-  </span> -->
   <div *ngIf="copied" class="copied">
     Copied
-  </div>
+  </div> 
+  <br>
+
+  <button class="del" kendoButton [primary]="true" (click)="delete()">
+    <i class="material-icons">
+      delete
+    </i>
+  </button>
 </div>

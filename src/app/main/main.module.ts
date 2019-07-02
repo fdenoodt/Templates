@@ -11,8 +11,8 @@ import { ToolBarModule } from '@progress/kendo-angular-toolbar';
 import { EditorModule } from '@progress/kendo-angular-editor';
 import { TreeViewModule } from '@progress/kendo-angular-treeview';
 import { InputsModule } from '@progress/kendo-angular-inputs';
-
 import { ClipboardModule } from 'ngx-clipboard';
+
 
 @NgModule({
   declarations: [

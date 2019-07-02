@@ -1,3 +1,13 @@
 .main {
   min-height: 100vh;
 }
+
+.sidebarOverlay {
+  height: 100vh;
+}
+
+.sidebar {
+  position: fixed;
+  height: 100vh;
+  overflow-y: scroll;
+}

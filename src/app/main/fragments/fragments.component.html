@@ -1,6 +1,7 @@
 <div class="fragments">
   <kendo-toolbar>
-    <kendo-toolbar-button kendoButton [primary]="true" [text]="'Add'" (click)="newFragment()"></kendo-toolbar-button>
+    <kendo-toolbar-button kendoButton [primary]="true" [text]="'Add'" (click)="newFragment()">
+    </kendo-toolbar-button>
   </kendo-toolbar>
 
   <p fxLayoutAlign="center center" *ngIf="errorMessage != null">
@@ -8,6 +9,7 @@
   </p>
 
   <div *ngFor="let el of fragments">
-    <app-fragment [fragment]="el"></app-fragment>
+    <app-fragment [fragment]="el" (deleted)="deleteFragmentRequested($event)">
+    </app-fragment>
   </div>
 </div>

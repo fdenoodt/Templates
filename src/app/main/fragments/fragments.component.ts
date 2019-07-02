@@ -40,8 +40,17 @@ export class FragmentsComponent implements OnInit, OnChanges {
     };
     this.fragmentsService.addFragment(frag, this.pageId).subscribe(
       data => {
-        console.log(data);
         this.fragments.push(data);
+      },
+      error => this.errorMessage = <any>error // casting naar any
+    );
+  }
+
+  deleteFragmentRequested(id: number): void {
+    this.fragmentsService.removeFragment(id).subscribe(
+      () => {
+        const frag = this.fragments.filter(e => e.id === id)[0];
+        this.fragments.splice(this.fragments.indexOf(frag), 1);
       },
       error => this.errorMessage = <any>error // casting naar any
     );

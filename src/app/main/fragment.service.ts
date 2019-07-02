@@ -18,8 +18,38 @@ export class FragmentService {
   constructor(private http: HttpClient) {
   }
 
-  addFragment(frag: IFragment, pageId: number): Observable<IFragment> {
-    return this.http.post<IFragment>(`${this.url}addFragment.php`, { fragment: frag, pageId })
+  addFragment(fragment: IFragment, pageId: number): Observable<IFragment> {
+    return this.http.post<IFragment>(`${this.url}addFragment.php`, { fragment, pageId })
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  addPage(page: IPage, dirId: number): Observable<IPage> {
+    return this.http.post<IPage>(`${this.url}addPage.php`, { id: page.id, text: page.text, dirId })
+      .pipe(
+        map(v => {
+          return { id: v.id, text: v.text, type: 'page', fragments: [] };
+        }),
+        tap(data => console.log('all:', data)),
+        catchError(this.handleError)
+      );
+    // TODO: ADD TYPES
+
+  }
+
+  addDirectory(dir: IDirectory): Observable<IDirectory> {
+    return this.http.post<IDirectory>(`${this.url}addDirectory.php`, { id: dir.id, text: dir.text })
+      .pipe(
+        map(v => {
+          return { id: v.id, text: v.text, type: 'directory', items: [] };
+        }),
+        catchError(this.handleError)
+      );
+  }
+
+  removeFragment(id: number) {
+    return this.http.post<IFragment>(`${this.url}removeFragment.php`, id)
       .pipe(
         catchError(this.handleError)
       );

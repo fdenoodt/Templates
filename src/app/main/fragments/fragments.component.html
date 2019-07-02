@@ -1,10 +1,13 @@
-<p fxLayoutAlign="center center" *ngIf="errorMessage != null">
-  {{ errorMessage }}
-</p>
+<div class="fragments">
+  <kendo-toolbar>
+    <kendo-toolbar-button kendoButton [primary]="true" [text]="'Add'" (click)="newFragment()"></kendo-toolbar-button>
+  </kendo-toolbar>
 
-<!-- <h1>
-  {{fragmentPage?.text}}
-</h1> -->
-<div *ngFor="let el of fragments">
-  <app-fragment [fragment]="el"></app-fragment>
+  <p fxLayoutAlign="center center" *ngIf="errorMessage != null">
+    {{ errorMessage }}
+  </p>
+
+  <div *ngFor="let el of fragments">
+    <app-fragment [fragment]="el"></app-fragment>
+  </div>
 </div>

@@ -3,7 +3,7 @@ import { IDirectory } from './directory';
 import { IPage } from './page';
 
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpEvent } from '@angular/common/http';
 import { Observable, throwError, Observer, observable } from 'rxjs';
 import { catchError, tap, first, filter } from 'rxjs/operators';
 import { map } from 'rxjs/operators';
@@ -18,6 +18,14 @@ export class FragmentService {
   constructor(private http: HttpClient) {
   }
 
+  addFragment(frag: IFragment, pageId: number): Observable<IFragment> {
+    return this.http.post<IFragment>(`${this.url}addFragment.php`, { fragment: frag, pageId })
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+
   getDictionariesAndPages(): Observable<IDirectory[]> {
     return this.http.get<IDirectory[]>(this.url + this.directories).pipe(
       tap(data => console.log('all:', data)),
@@ -31,9 +39,10 @@ export class FragmentService {
     );
   }
 
-
   handleError(handleError: HttpErrorResponse) {
     console.error('something went wrong');
+    console.log(handleError);
+
 
     let errMsg: string;
     if (handleError.error instanceof ErrorEvent) {

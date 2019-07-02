@@ -26,7 +26,22 @@ export class FragmentsComponent implements OnInit, OnChanges {
   loadFragments(): void {
     this.fragmentsService.getFragments(this.pageId).subscribe(
       data => {
-        this.fragments = data; // TODO: ONLY ONE SHOULD BE RECEIVED
+        this.fragments = data;
+      },
+      error => this.errorMessage = <any>error // casting naar any
+    );
+  }
+
+  newFragment() {
+    const frag: IFragment = {
+      id: 0,
+      content: '',
+      title: ''
+    };
+    this.fragmentsService.addFragment(frag, this.pageId).subscribe(
+      data => {
+        console.log(data);
+        this.fragments.push(data);
       },
       error => this.errorMessage = <any>error // casting naar any
     );

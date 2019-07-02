@@ -2,10 +2,17 @@
   padding: 0.2em 0.7em;
   background: #ff6358;
   color: white;
-  font-weight: bold;
   border-radius: 20px;
-  margin: 0.8em 2em;
   position: relative;
   top: -2.3em;
+  margin: 0.8em 2em;
   display:inline;
+  z-index: 2;
+ }
+
+ .fragment {
+   margin: 1em 1em;
+   background: #f6f6f6;
+   border: solid 1px #ededed;
+   padding-bottom: 0.5em;
  }

@@ -4,4 +4,5 @@ export interface IPage {
   id: number;
   text: string;
   fragments: Array<IFragment>;
+  type: string;
 }

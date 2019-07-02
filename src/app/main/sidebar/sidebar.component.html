@@ -5,6 +5,6 @@
 
   <kendo-treeview [nodes]="data" textField="text" kendoTreeViewExpandable kendoTreeViewSelectable
     kendoTreeViewHierarchyBinding childrenField="items" (selectionChange)="handleSelection($event)"
-    [(selectedKeys)]="selectedKeys">
+    [(selectedKeys)]="selectedKeys" [(expandedKeys)]="expandedKeys">
   </kendo-treeview>
 </div>

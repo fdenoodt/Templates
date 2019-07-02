@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FragmentService } from '../fragment.service';
 import { IDirectory } from '../directory';
+import { IPage } from '../page';
 
 @Component({
   selector: 'app-sidebar',
@@ -11,6 +12,7 @@ import { IDirectory } from '../directory';
 export class SidebarComponent implements OnInit {
   public data: IDirectory[] = [];
   public selectedKeys: any[] = [];
+  public expandedKeys: any[] = [];
   public errorMessage: string;
 
 
@@ -22,15 +24,22 @@ export class SidebarComponent implements OnInit {
     this.fragmentsService.getDictionariesAndPages().subscribe(
       data => {
         this.data = data;
-        console.log(data);
       },
       error => this.errorMessage = <any>error // casting naar any
     );
   }
 
-  public handleSelection({ dataItem }: any): void {
-    const id = dataItem.id;
-    this.selectionChanged.emit(id);
+  public handleSelection({ dataItem, index }: any): void {
+    if (dataItem.type === 'page') {
+      const id = dataItem.id;
+      this.selectionChanged.emit(id);
+    } else { // Open directory
+      if (this.expandedKeys.includes(index)) {
+        this.expandedKeys.splice(this.expandedKeys.indexOf(index), 1);
+      } else {
+        this.expandedKeys.push(index);
+      }
+    }
   }
 
 }

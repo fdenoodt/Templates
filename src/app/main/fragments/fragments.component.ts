@@ -10,7 +10,7 @@ import { FragmentService } from '../fragment.service';
 })
 export class FragmentsComponent implements OnInit, OnChanges {
 
-  fragmentPage: IFragment;
+  fragments: IFragment[];
   @Input() pageId: number;
   public errorMessage: string;
 
@@ -24,9 +24,9 @@ export class FragmentsComponent implements OnInit, OnChanges {
   }
 
   loadFragments(): void {
-    this.fragmentsService.getFragment(this.pageId).subscribe(
+    this.fragmentsService.getFragments(this.pageId).subscribe(
       data => {
-        this.fragmentPage = data[0]; // TODO: ONLY ONE SHOULD BE RECEIVED
+        this.fragments = data; // TODO: ONLY ONE SHOULD BE RECEIVED
       },
       error => this.errorMessage = <any>error // casting naar any
     );

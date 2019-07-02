@@ -1,11 +1,10 @@
-<p *ngIf="errorMessage != null">
+<p fxLayoutAlign="center center" *ngIf="errorMessage != null">
   {{ errorMessage }}
 </p>
 
-
-<h1>
+<!-- <h1>
   {{fragmentPage?.text}}
-</h1>
-<div *ngFor="let el of fragmentPage?.items">
+</h1> -->
+<div *ngFor="let el of fragments">
   <app-fragment [fragment]="el"></app-fragment>
 </div>

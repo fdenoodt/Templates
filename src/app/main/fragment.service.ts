@@ -11,23 +11,26 @@ import { map } from 'rxjs/operators';
 @Injectable({ providedIn: 'root' })
 export class FragmentService {
 
-  private url = 'http://localhost/templates/getDirectories.php';
+  private url = 'http://localhost/templates/';
+  private directories = 'getDirectories.php';
+  private fragments = 'getFragments.php';
 
   constructor(private http: HttpClient) {
   }
 
   getDictionariesAndPages(): Observable<IDirectory[]> {
-    return this.http.get<IDirectory[]>(this.url).pipe(
+    return this.http.get<IDirectory[]>(this.url + this.directories).pipe(
       tap(data => console.log('all:', data)),
       catchError(this.handleError)
     );
   }
 
-  getFragment(id: number): Observable<IFragment[]> {
-    return this.http.get<IFragment[]>(this.url).pipe(
+  getFragments(id: number): Observable<IFragment[]> {
+    return this.http.get<IFragment[]>(`${this.url}${this.fragments}?page_id=${id}`).pipe(
       catchError(this.handleError)
     );
   }
+
 
   handleError(handleError: HttpErrorResponse) {
     console.error('something went wrong');

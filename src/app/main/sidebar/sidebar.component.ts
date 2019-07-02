@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FragmentService } from '../fragment.service';
-import { IFragment } from '../fragment';
+import { IDirectory } from '../directory';
 
 @Component({
   selector: 'app-sidebar',
@@ -9,7 +9,7 @@ import { IFragment } from '../fragment';
   providers: [FragmentService]
 })
 export class SidebarComponent implements OnInit {
-  public data: IFragment[] = [];
+  public data: IDirectory[] = [];
   public selectedKeys: any[] = [];
   public errorMessage: string;
 
@@ -19,9 +19,10 @@ export class SidebarComponent implements OnInit {
   constructor(private fragmentsService: FragmentService) { }
 
   ngOnInit() {
-    this.fragmentsService.getFragmentsByName().subscribe(
+    this.fragmentsService.getDictionariesAndPages().subscribe(
       data => {
         this.data = data;
+        console.log(data);
       },
       error => this.errorMessage = <any>error // casting naar any
     );

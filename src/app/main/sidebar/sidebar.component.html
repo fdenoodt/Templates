@@ -1,3 +1,14 @@
+<kendo-toolbar>
+  <kendo-toolbar-button kendoButton [icon]="'folder-add Unicode: e902'" [primary]="true" [text]="'Add'"
+    (click)="addDirectory()">
+  </kendo-toolbar-button>
+
+  <kendo-toolbar-button [disabled]="selectedItem == null || selectedItem?.type == 'page'" kendoButton [icon]="'file-add 
+  Unicode: e907'" [primary]="true" [text]="'Add'" (click)="addPage()">
+  </kendo-toolbar-button>
+</kendo-toolbar>
+
+
 <div class="sidebar">
   <p fxLayoutAlign="center center" *ngIf="errorMessage != null">
     {{ errorMessage }}

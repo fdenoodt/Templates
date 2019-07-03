@@ -1,7 +1,9 @@
-<form class="example-config toolbar" (ngSubmit)="search()">
-  <input required type=" text" kendoTextBox name="searchField" (blur)="lostFocus()" [(ngModel)]="searchField">
+<form class="example-config toolbar" [formGroup]="form" (ngSubmit)="search()">
+  <!-- [(ngModel)]="searchField" -->
+  <input type="text" kendoTextBox name="searchField" (focus)="focus()" (blur)="lostFocus()" formControlName="search">
 
-  <button type="submit" class="search" kendoButton [primary]="true" placeholder="search...">
+  <button type="submit" [disabled]="form.get('search').value.length < 1" class="search" kendoButton [primary]="true"
+    placeholder="search...">
     <span class="k-icon k-i-search"></span>
   </button>
 </form>

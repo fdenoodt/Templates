@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FragmentService } from '../../fragment.service';
 import { IFragment } from '../../fragment';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-sidebar-bottom',
@@ -10,18 +11,23 @@ import { IFragment } from '../../fragment';
 })
 export class SidebarBottomComponent implements OnInit {
 
-  searchField: string = '';
+  form: FormGroup;
+
 
   @Output() fragmentsFound: EventEmitter<IFragment[]> = new EventEmitter<IFragment[]>();
 
-  constructor(private fragmentsService: FragmentService) { }
+  constructor(private fragmentsService: FragmentService, private fb: FormBuilder) { }
 
   ngOnInit() {
+    this.form = this.fb.group({
+      search: ['', [Validators.required]]
+    });
+
+    this.form.patchValue({ search: '' });
   }
 
   search(): void {
-    // TEMPORARY WORKAROUND, MUST BE IMPROVED WITH FORMBUILDER AND CLEARING TEXT
-    this.fragmentsService.findFragmentsByText(this.searchField.trim()).subscribe(
+    this.fragmentsService.findFragmentsByText((this.form.get('search').value).trim()).subscribe(
       data => {
         this.fragmentsFound.emit(data);
       },
@@ -30,8 +36,13 @@ export class SidebarBottomComponent implements OnInit {
 
   }
 
+  focus(): void {
+    this.form.get('search').setValidators([Validators.required]);
+    this.form.get('search').updateValueAndValidity();
+  }
+
   lostFocus(): void {
-    // MUST USE REACTIVE FORMS HERE
-    this.searchField = ' ';
+    this.form.get('search').clearValidators();
+    this.form.get('search').updateValueAndValidity();
   }
 }

@@ -27,9 +27,18 @@
       </p>
     </div>
 
+
     <div *ngIf="copied" class="copied">
       Copied
     </div>
+
+    <br>
+
+    <p class="centerText">
+      <span *ngIf="synchronizing" class="k-i-loading k-icon centerText" style="font-size: 18px;">
+      </span>
+    </p>
+
     <br>
 
     <button class="del" kendoButton [primary]="true" (click)="delete()">

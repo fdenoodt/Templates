@@ -16,18 +16,23 @@ export class FragmentComponent implements OnInit, OnChanges {
   @Input() fragment: IFragment;
   @Output() deleted: EventEmitter<number> = new EventEmitter<number>();
   copied: Boolean = false;
+  synchronizing: Boolean = false;
   fragmentForm: FormGroup;
+  errorMessage: string;
 
   constructor(
     private _clipboardService: ClipboardService,
     private fragmentsService: FragmentService,
     private fb: FormBuilder) { }
 
+
   ngOnInit() {
     this.fragmentForm = this.fb.group({
       title: ['', [Validators.required]],
       content: ['', [Validators.required]]
     });
+
+    this.fragmentForm.patchValue(this.fragment);
 
     this.fragmentForm.valueChanges.pipe(
       debounceTime(400)
@@ -56,6 +61,19 @@ export class FragmentComponent implements OnInit, OnChanges {
   }
 
   submit(res): void {
+    const title = res.title;
+    const content = res.title;
+
+    this.fragment.title = title;
+    this.fragment.content = content;
+
+    this.synchronizing = true;
+    this.fragmentsService.updateFragment(this.fragment).subscribe(
+      data => {
+        this.synchronizing = false;
+      },
+      error => this.errorMessage = <any>error // casting naar any
+    );
   }
 
 }

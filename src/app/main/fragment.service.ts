@@ -73,6 +73,13 @@ export class FragmentService {
       );
   }
 
+  updateFragment(fragment: IFragment): Observable<IFragment> {
+    return this.http.post<IFragment>(`${this.url}updateFragment.php`, fragment)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
 
   getDictionariesAndPages(): Observable<IDirectory[]> {
     return this.http.get<IDirectory[]>(this.url + this.directories).pipe(

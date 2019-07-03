@@ -55,6 +55,20 @@ export class FragmentService {
       );
   }
 
+  removePage(id: number) {
+    return this.http.post<IFragment>(`${this.url}removePage.php`, id)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  removeDir(id: number) {
+    return this.http.post<IFragment>(`${this.url}removeDirectory.php`, id)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
 
   getDictionariesAndPages(): Observable<IDirectory[]> {
     return this.http.get<IDirectory[]>(this.url + this.directories).pipe(

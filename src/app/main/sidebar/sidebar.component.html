@@ -6,6 +6,9 @@
   <kendo-toolbar-button [disabled]="selectedItem == null || selectedItem?.type == 'page'" kendoButton [icon]="'file-add 
   Unicode: e907'" [primary]="true" [text]="'Add'" (click)="addPage()">
   </kendo-toolbar-button>
+
+  <kendo-toolbar-button [disabled]="selectedItem == null" kendoButton [icon]="'delete'" [primary]="true" [text]="'Del'" (click)="delSitebarItem()">
+</kendo-toolbar-button>
 </kendo-toolbar>
 
 

@@ -1,8 +1,9 @@
 import { IFragment } from './fragment';
+import { ITreeItem } from './treeItem'
 
-export interface IPage {
-  id: number;
-  text: string;
+export interface IPage extends ITreeItem {
+  // id: number;
+  // text: string;
   fragments: Array<IFragment>;
-  type: string;
+  // type: string;
 }

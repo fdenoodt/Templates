@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FragmentService } from '../fragment.service';
 import { IDirectory } from '../directory';
 import { IPage } from '../page';
+import { ITreeItem } from '../treeItem';
 
 @Component({
   selector: 'app-sidebar',
@@ -13,7 +14,7 @@ export class SidebarComponent implements OnInit {
   public data: IDirectory[] = [];
   public selectedKeys: any[] = [];
   public expandedKeys: any[] = [];
-  public selectedItem: IDirectory = null;
+  public selectedItem: ITreeItem = null;
   public errorMessage: string;
   public canAddPage = false;
 
@@ -32,14 +33,13 @@ export class SidebarComponent implements OnInit {
   }
 
   handleSelection({ dataItem, index }: any): void {
+    this.selectedItem = dataItem;
 
     if (dataItem.type === 'page') {
       const id = dataItem.id;
       this.selectionChanged.emit(id);
-      this.selectedItem = null;
 
     } else { // Open directory
-      this.selectedItem = dataItem;
 
       this.canAddPage = true;
       this.selectionChanged.emit(0);
@@ -58,7 +58,7 @@ export class SidebarComponent implements OnInit {
       id: 0,
       text: 'new dir',
       items: [],
-      type: null
+      type: null,
     };
 
     this.fragmentsService.addDirectory(dir).subscribe(
@@ -68,7 +68,7 @@ export class SidebarComponent implements OnInit {
       error => {
         return this.errorMessage = <any>error;
       }
-    )
+    );
   }
 
   addPage(): void {
@@ -81,12 +81,50 @@ export class SidebarComponent implements OnInit {
 
     this.fragmentsService.addPage(page, this.selectedItem.id).subscribe(
       data => {
-        this.selectedItem.items.push(data);
+        // No validation for page or dir needed because buttton is disabled when page selected
+        (this.selectedItem as IDirectory).items.push(data);
       },
       error => {
         return this.errorMessage = <any>error;
       }
     );
+  }
+
+  delSitebarItem(): void {
+    const id = this.selectedItem.id;
+    if (this.selectedItem.type === 'page') {
+      this.fragmentsService.removePage(id).subscribe(
+        () => {
+          for (const dir of this.data) {
+            const pages = dir.items.filter(e => e.id === id);
+            if (pages.length > 0) {
+              const page = pages[0];
+              dir.items.splice(dir.items.indexOf(page), 1);
+              this.clearSelection();
+              break;
+            }
+          }
+          // const frag = this.data.filter(e => e.id === id)[0];
+
+          this.clearSelection();
+        },
+        error => this.errorMessage = <any>error
+      );
+    } else {
+      this.fragmentsService.removeDir(id).subscribe(
+        () => {
+          const dir = this.data.filter(e => e.id === id)[0];
+          this.data.splice(this.data.indexOf(dir), 1);
+          this.clearSelection();
+        },
+        error => this.errorMessage = <any>error
+      );
+    }
+  }
+
+  clearSelection(): void {
+    this.selectedItem = null;
+    this.selectedKeys = [];
   }
 
 }

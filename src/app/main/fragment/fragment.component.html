@@ -1,20 +1,42 @@
 <div class="fragment">
-  <kendo-textbox-container class="input" floatingLabel="Title">
-    <input kendoTextBox [(ngModel)]="fragment.title" />
-  </kendo-textbox-container>
-  <br>
-  <kendo-textbox-container class="input" floatingLabel="Content">
-    <textarea kendoTextArea [autoSize]="true" [(ngModel)]="fragment.content" (click)="copy($event)"></textarea>
-  </kendo-textbox-container>
+  <!-- Title -->
+  <form novalidate (ngSubmit)="submit()" [formGroup]="fragmentForm">
+    <div>
+      <kendo-textbox-container class="input" floatingLabel="Title">
+        <input kendoTextBox formControlName="title" [ngClass]="{'is-invalid': (fragmentForm.get('title').touched ||
+          fragmentForm.get('title').dirty) &&
+          !fragmentForm.get('title').valid }">
+      </kendo-textbox-container>
 
-  <div *ngIf="copied" class="copied">
-    Copied
-  </div> 
-  <br>
+      <p class="input warning" *ngIf="fragmentForm.get('title').dirty && fragmentForm.get('title').errors?.required">
+        Please enter a title.
+      </p>
+    </div>
 
-  <button class="del" kendoButton [primary]="true" (click)="delete()">
-    <i class="material-icons">
-      delete
-    </i>
-  </button>
+    <br>
+
+    <div>
+      <kendo-textbox-container class="input" floatingLabel="Content">
+        <textarea kendoTextArea formControlName="content" [ngClass]="{'is-invalid': (fragmentForm.get('content').touched ||
+        fragmentForm.get('content').dirty) &&
+        !fragmentForm.get('content').valid }" [autoSize]="true" (click)="copy($event)"></textarea>
+      </kendo-textbox-container>
+      <p class="input warning"
+        *ngIf="fragmentForm.get('content').dirty && fragmentForm.get('content').errors?.required">
+        Please enter the content.
+      </p>
+    </div>
+
+    <div *ngIf="copied" class="copied">
+      Copied
+    </div>
+    <br>
+
+    <button class="del" kendoButton [primary]="true" (click)="delete()">
+      <i class="material-icons">
+        delete
+      </i>
+    </button>
+  </form>
+
 </div>

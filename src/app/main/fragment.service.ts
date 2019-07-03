@@ -4,9 +4,13 @@ import { IPage } from './page';
 
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpEvent } from '@angular/common/http';
+import { FormGroup, FormBuilder, Validators, AbstractControl, ValidatorFn, FormControl, FormArray } from '@angular/forms';
 import { Observable, throwError, Observer, observable } from 'rxjs';
+
 import { catchError, tap, first, filter } from 'rxjs/operators';
 import { map } from 'rxjs/operators';
+
+
 
 @Injectable({ providedIn: 'root' })
 export class FragmentService {
@@ -34,7 +38,7 @@ export class FragmentService {
         tap(data => console.log('all:', data)),
         catchError(this.handleError)
       );
-    // TODO: ADD TYPES
+    // TODO: ADD TYPES 
 
   }
 

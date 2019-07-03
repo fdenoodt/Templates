@@ -2,6 +2,8 @@ import { Component, OnInit, Input, OnChanges, EventEmitter, Output } from '@angu
 import { IFragment } from '../fragment';
 import { ClipboardService } from 'ngx-clipboard';
 import { FragmentService } from '../fragment.service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-fragment',
@@ -14,10 +16,26 @@ export class FragmentComponent implements OnInit, OnChanges {
   @Input() fragment: IFragment;
   @Output() deleted: EventEmitter<number> = new EventEmitter<number>();
   copied: Boolean = false;
+  fragmentForm: FormGroup;
 
-  constructor(private _clipboardService: ClipboardService, private fragmentsService: FragmentService) { }
+  constructor(
+    private _clipboardService: ClipboardService,
+    private fragmentsService: FragmentService,
+    private fb: FormBuilder) { }
 
   ngOnInit() {
+    this.fragmentForm = this.fb.group({
+      title: ['', [Validators.required]],
+      content: ['', [Validators.required]]
+    });
+
+    this.fragmentForm.valueChanges.pipe(
+      debounceTime(400)
+    ).subscribe(res => {
+      if (!this.fragmentForm.invalid) {
+        this.submit(res);
+      }
+    });
   }
 
   ngOnChanges(): void {
@@ -35,6 +53,9 @@ export class FragmentComponent implements OnInit, OnChanges {
 
   delete(): void {
     this.deleted.emit(this.fragment.id);
+  }
+
+  submit(res): void {
   }
 
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FragmentService } from '../fragment.service';
 import { IDirectory } from '../directory';
 import { IPage } from '../page';
@@ -12,13 +12,12 @@ import { ITreeItem } from '../treeItem';
 })
 export class SidebarComponent implements OnInit {
   public data: IDirectory[] = [];
-  public selectedKeys: any[] = [];
   public expandedKeys: any[] = [];
   public selectedItem: ITreeItem = null;
   public errorMessage: string;
   public canAddPage = false;
 
-
+  @Input() selectedKeys: any[] = [];
   @Output() selectionChanged: EventEmitter<number> = new EventEmitter<number>();
 
   constructor(private fragmentsService: FragmentService) { }
@@ -36,7 +35,6 @@ export class SidebarComponent implements OnInit {
     this.selectedItem = dataItem;
 
     if (dataItem.type === 'page') {
-      // const id = dataItem.id;
       this.selectionChanged.emit(dataItem);
 
     } else { // Open directory

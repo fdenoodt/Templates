@@ -2,7 +2,8 @@
   <div class="sidebarOverlay" fxFlex="14em">
 
     <div class="treeOverlay">
-      <app-sidebar class="sidebar" fxFlex="14em" (selectionChanged)='fragmentsRequested($event)'></app-sidebar>
+      <app-sidebar class="sidebar" fxFlex="14em" (selectionChanged)='fragmentsRequested($event)'
+        [selectedKeys]="selectedKeys"></app-sidebar>
     </div>
 
     <div>

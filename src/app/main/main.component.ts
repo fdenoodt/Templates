@@ -12,6 +12,8 @@ export class MainComponent implements OnInit {
 
   public selectedFragmentPage: IPage;
   public foundFragments: IFragment[] = null;
+  public selectedKeys: any[] = [];
+
   constructor() { }
 
   ngOnInit() {
@@ -25,6 +27,7 @@ export class MainComponent implements OnInit {
   fragmentsFound(data: IFragment[]): void {
     this.selectedFragmentPage = null;
     this.foundFragments = data;
+    this.selectedKeys = [];
   }
 
 }

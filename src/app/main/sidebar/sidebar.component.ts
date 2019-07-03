@@ -36,13 +36,13 @@ export class SidebarComponent implements OnInit {
     this.selectedItem = dataItem;
 
     if (dataItem.type === 'page') {
-      const id = dataItem.id;
-      this.selectionChanged.emit(id);
+      // const id = dataItem.id;
+      this.selectionChanged.emit(dataItem);
 
     } else { // Open directory
 
       this.canAddPage = true;
-      this.selectionChanged.emit(0);
+      this.selectionChanged.emit(null);
 
       if (this.expandedKeys.includes(index)) {
         // Temporary: do nothing

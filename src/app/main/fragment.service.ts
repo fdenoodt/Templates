@@ -107,4 +107,10 @@ export class FragmentService {
     }
     return throwError(errMsg);
   }
+
+  findFragmentsByText(keywords: string): Observable<IFragment[]> {
+    return this.http.get<IFragment[]>(`${this.url}findFragments.php?text=${keywords}`).pipe(
+      catchError(this.handleError)
+    );
+  }
 }

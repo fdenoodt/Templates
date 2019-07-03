@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MainRoutingModule } from './main-routing.module';
 
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { SidebarBottomComponent } from './sidebar/sidebar-bottom/sidebar-bottom.component';
 import { FragmentsComponent } from './fragments/fragments.component';
 import { FragmentComponent } from './fragment/fragment.component';
 
@@ -18,6 +19,7 @@ import { ClipboardModule } from 'ngx-clipboard';
 
 @NgModule({
   declarations: [
+    SidebarBottomComponent,
     SidebarComponent,
     FragmentComponent,
     FragmentsComponent],
@@ -29,10 +31,11 @@ import { ClipboardModule } from 'ngx-clipboard';
     EditorModule,
     TreeViewModule,
     InputsModule,
-    ClipboardModule
+    ClipboardModule,
+    ReactiveFormsModule
   ],
   exports: [
-    SidebarComponent, FragmentsComponent, FragmentComponent, MainRoutingModule
+    SidebarBottomComponent, SidebarComponent, FragmentsComponent, FragmentComponent, MainRoutingModule
   ]
 })
 export class MainModule { }

@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { IFragment } from '../fragment';
 import { FragmentService } from '../fragment.service';
+import { IPage } from '../page';
 
 @Component({
   selector: 'app-fragments',
@@ -10,8 +11,10 @@ import { FragmentService } from '../fragment.service';
 })
 export class FragmentsComponent implements OnInit, OnChanges {
 
-  fragments: IFragment[];
-  @Input() pageId: number;
+  @Input() fragments: IFragment[];
+  @Input() page?: IPage;
+  @Input() found: Boolean = false;
+
   public errorMessage: string;
 
   constructor(private fragmentsService: FragmentService) { }
@@ -20,11 +23,17 @@ export class FragmentsComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(): void {
-    this.loadFragments();
+    if (!this.found) {
+      this.loadFragments();
+    } else { // no need to load
+      console.log(this.found);
+
+      console.log(this.fragments);
+    }
   }
 
   loadFragments(): void {
-    this.fragmentsService.getFragments(this.pageId).subscribe(
+    this.fragmentsService.getFragments(this.page.id).subscribe(
       data => {
         this.fragments = data;
       },
@@ -38,7 +47,7 @@ export class FragmentsComponent implements OnInit, OnChanges {
       content: '',
       title: ''
     };
-    this.fragmentsService.addFragment(frag, this.pageId).subscribe(
+    this.fragmentsService.addFragment(frag, this.page.id).subscribe(
       data => {
         this.fragments.push(data);
       },

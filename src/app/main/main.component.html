@@ -1,10 +1,19 @@
 <div fxLayoutAlign="stretch" class="main">
   <div class="sidebarOverlay" fxFlex="14em">
-    <app-sidebar class="sidebar" fxFlex="14em" (selectionChanged)='fragmentsRequested($event)'></app-sidebar>
+
+    <div class="treeOverlay">
+      <app-sidebar class="sidebar" fxFlex="14em" (selectionChanged)='fragmentsRequested($event)'></app-sidebar>
+    </div>
+
+    <div>
+      <app-sidebar-bottom (fragmentsFound)="fragmentsFound($event)"></app-sidebar-bottom>
+    </div>
   </div>
 
-  <app-fragments fxFlex="100%" *ngIf="selectedFragmentPage > 0" [pageId]='selectedFragmentPage'></app-fragments>
-  <div class="centervh" fxFlex="100%" *ngIf="selectedFragmentPage <= 0">
+  <app-fragments fxFlex="100%" *ngIf="selectedFragmentPage != null || foundFragments != null"
+    [page]='selectedFragmentPage' [fragments]='foundFragments' [found]='foundFragments?.length > 0'></app-fragments>
+
+  <div class="centervh" fxFlex="100%" *ngIf="selectedFragmentPage == null && foundFragments?.length <= 0">
     <p fxLayoutAlign="center center">
       Select an element in the sidebar.
     </p>

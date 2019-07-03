@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { IFragment } from './fragment';
+import { IDirectory } from './directory';
+import { IPage } from './page';
 
 @Component({
   selector: 'app-main',
@@ -7,14 +10,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainComponent implements OnInit {
 
-  public selectedFragmentPage = 0;
+  public selectedFragmentPage: IPage;
+  public foundFragments: IFragment[] = null;
   constructor() { }
 
   ngOnInit() {
   }
 
-  fragmentsRequested(id: number): void {
-    this.selectedFragmentPage = id;
+  fragmentsRequested(page: IPage): void {
+    this.selectedFragmentPage = page;
+  }
+
+  fragmentsFound(data: IFragment[]): void {
+    this.selectedFragmentPage = null;
+    this.foundFragments = data;
   }
 
 }

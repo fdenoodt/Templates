@@ -14,7 +14,9 @@ import { debounceTime } from 'rxjs/operators';
 export class FragmentComponent implements OnInit, OnChanges {
 
   @Input() fragment: IFragment;
+  @Input() found: Boolean;
   @Output() deleted: EventEmitter<number> = new EventEmitter<number>();
+
   copied: Boolean = false;
   synchronizing: Boolean = false;
   fragmentForm: FormGroup;
@@ -61,6 +63,8 @@ export class FragmentComponent implements OnInit, OnChanges {
   }
 
   submit(res): void {
+    console.log(res);
+
     const title = res.title;
     const content = res.title;
 

@@ -26,9 +26,6 @@ export class FragmentsComponent implements OnInit, OnChanges {
     if (!this.found) {
       this.loadFragments();
     } else { // no need to load
-      console.log(this.found);
-
-      console.log(this.fragments);
     }
   }
 

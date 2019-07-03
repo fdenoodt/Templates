@@ -15,4 +15,9 @@
     <app-fragment [fragment]="el" [found]="found" (deleted)="deleteFragmentRequested($event)">
     </app-fragment>
   </div>
+
+  <p class="centerText" *ngIf="found && fragments?.length < 1">
+    0 elements
+  </p>
+
 </div>

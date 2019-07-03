@@ -10,7 +10,7 @@ import { IFragment } from '../../fragment';
 })
 export class SidebarBottomComponent implements OnInit {
 
-  searchField: string;
+  searchField: string = '';
 
   @Output() fragmentsFound: EventEmitter<IFragment[]> = new EventEmitter<IFragment[]>();
 
@@ -20,13 +20,18 @@ export class SidebarBottomComponent implements OnInit {
   }
 
   search(): void {
-    // this.searchField = ' '; //TEMPORARY WORKAROUND, MUST BE IMPROVED WITH FORMBUILDER AND CLEARING TEXT
+    // TEMPORARY WORKAROUND, MUST BE IMPROVED WITH FORMBUILDER AND CLEARING TEXT
     this.fragmentsService.findFragmentsByText(this.searchField.trim()).subscribe(
       data => {
         this.fragmentsFound.emit(data);
       },
       error => console.log(error)
     );
+
   }
 
+  lostFocus(): void {
+    // MUST USE REACTIVE FORMS HERE
+    this.searchField = ' ';
+  }
 }

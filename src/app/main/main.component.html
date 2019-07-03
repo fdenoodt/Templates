@@ -11,9 +11,9 @@
   </div>
 
   <app-fragments fxFlex="100%" *ngIf="selectedFragmentPage != null || foundFragments != null"
-    [page]='selectedFragmentPage' [fragments]='foundFragments' [found]='foundFragments?.length > 0'></app-fragments>
+    [page]='selectedFragmentPage' [fragments]='foundFragments' [found]='foundFragments != null'></app-fragments>
 
-  <div class="centervh" fxFlex="100%" *ngIf="selectedFragmentPage == null && foundFragments?.length <= 0">
+  <div class="centervh" fxFlex="100%" *ngIf="selectedFragmentPage == null && foundFragments == null">
     <p fxLayoutAlign="center center">
       Select an element in the sidebar.
     </p>

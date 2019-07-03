@@ -19,6 +19,7 @@ export class MainComponent implements OnInit {
 
   fragmentsRequested(page: IPage): void {
     this.selectedFragmentPage = page;
+    this.foundFragments = null;
   }
 
   fragmentsFound(data: IFragment[]): void {

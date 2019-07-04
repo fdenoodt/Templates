@@ -12,6 +12,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class SidebarBottomComponent implements OnInit {
 
   form: FormGroup;
+  private selectedSearch: Boolean = false;
 
 
   @Output() fragmentsFound: EventEmitter<IFragment[]> = new EventEmitter<IFragment[]>();
@@ -27,15 +28,26 @@ export class SidebarBottomComponent implements OnInit {
 
     const that = this;
     window.addEventListener('keydown', function (e) {
+
+      // ctrl + F
       if (e.keyCode === 114 || (e.ctrlKey && e.keyCode === 70)) {
         e.preventDefault();
-
-        const invalidElements = that.el.nativeElement.querySelectorAll('.searchField');
-        if (invalidElements.length > 0) {
-          invalidElements[0].focus();
-        }
+        that.searchInput().focus();
       }
+
+      // esc
+      if (e.key === 'Escape' || e.code === 'Escape') {
+        that.searchInput().blur();
+      }
+
     });
+  }
+
+  searchInput(): any {
+    const invalidElements = this.el.nativeElement.querySelectorAll('.searchField');
+    if (invalidElements.length > 0) {
+      return invalidElements[0];
+    }
   }
 
   search(): void {
@@ -51,10 +63,14 @@ export class SidebarBottomComponent implements OnInit {
   focus(): void {
     this.form.get('search').setValidators([Validators.required]);
     this.form.get('search').updateValueAndValidity();
+
+    this.selectedSearch = true;
   }
 
   lostFocus(): void {
     this.form.get('search').clearValidators();
     this.form.get('search').updateValueAndValidity();
+
+    this.selectedSearch = false;
   }
 }

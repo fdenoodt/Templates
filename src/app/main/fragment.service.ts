@@ -9,6 +9,7 @@ import { Observable, throwError, Observer, observable } from 'rxjs';
 
 import { catchError, tap, first, filter } from 'rxjs/operators';
 import { map } from 'rxjs/operators';
+import { ITreeItem } from './treeItem';
 
 
 
@@ -75,6 +76,13 @@ export class FragmentService {
 
   updateFragment(fragment: IFragment): Observable<IFragment> {
     return this.http.post<IFragment>(`${this.url}updateFragment.php`, fragment)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  updateDirOrPage(item: ITreeItem): Observable<ITreeItem> {
+    return this.http.post<ITreeItem>(`${this.url}${item.type === 'page' ? 'updatePage' : 'updateDirectory'}.php`, item)
       .pipe(
         catchError(this.handleError)
       );

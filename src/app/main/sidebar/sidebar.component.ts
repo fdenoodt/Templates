@@ -3,6 +3,7 @@ import { FragmentService } from '../fragment.service';
 import { IDirectory } from '../directory';
 import { IPage } from '../page';
 import { ITreeItem } from '../treeItem';
+import { WarnerService } from '../../shared/warning/warner.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -16,11 +17,12 @@ export class SidebarComponent implements OnInit {
   public selectedItem: ITreeItem = null;
   public errorMessage: string;
   public canAddPage = false;
+  public treeViewSelected: Boolean = false;
 
   @Input() selectedKeys: any[] = [];
   @Output() selectionChanged: EventEmitter<number> = new EventEmitter<number>();
 
-  constructor(private fragmentsService: FragmentService) { }
+  constructor(private fragmentsService: FragmentService, private warningService: WarnerService) { }
 
   ngOnInit() {
     this.fragmentsService.getDictionariesAndPages().subscribe(
@@ -29,7 +31,38 @@ export class SidebarComponent implements OnInit {
       },
       error => this.errorMessage = <any>error // casting naar any
     );
+
+    const that = this;
+    window.addEventListener('keydown', function (e) {
+      if (that.treeViewSelected) {
+        if (e.key === 'F2' || e.code === 'F2') {
+          that.warningService.onClose(that.handlePopupClosed, that);
+          that.warningService.open({
+            title: 'Enter a new name',
+            input: that.selectedItem.text,
+          });
+        }
+      }
+    });
   }
+
+  handlePopupClosed(res: any, who: any): void {
+    const selected = who.selectedItem;
+
+    if (res.status === 'ok') {
+      who.selectedItem.text = res.text;
+      who.fragmentsService.updateDirOrPage(selected).subscribe(
+        data => {
+
+        },
+        error => {
+          return this.errorMessage = <any>error;
+        }
+      );
+    }
+  }
+
+
 
   handleSelection({ dataItem, index }: any): void {
     this.selectedItem = dataItem;
@@ -123,6 +156,15 @@ export class SidebarComponent implements OnInit {
   clearSelection(): void {
     this.selectedItem = null;
     this.selectedKeys = [];
+  }
+
+  focus(): void {
+    this.treeViewSelected = true;
+
+  }
+
+  lostFocus(): void {
+    this.treeViewSelected = false;
   }
 
 }

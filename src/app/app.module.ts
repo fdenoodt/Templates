@@ -9,13 +9,12 @@ import { SignInComponent } from './signin/signin.component';
 import { MainComponent } from './main/main.component';
 
 import { MainModule } from './main/main.module';
-
+import { SharedModule } from './shared/shared.module';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
-
-
+import { WarnerService } from './shared/warning/warner.service';
 
 @NgModule({
   declarations: [
@@ -28,11 +27,13 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     BrowserModule,
     AppRoutingModule,
     MainModule,
+    SharedModule,
+
     BrowserAnimationsModule,
     FlexLayoutModule,
-    HttpClientModule
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [WarnerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

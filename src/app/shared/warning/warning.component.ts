@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import { WarnerService } from './warner.service';
 import { stat } from 'fs';
 import { IWarning } from './warning';
@@ -13,7 +13,7 @@ export class WarningComponent implements OnInit {
 
   warning: IWarning;
   dialogOpened = false;
-  constructor(private warnerService: WarnerService) {
+  constructor(private warnerService: WarnerService, private el: ElementRef) {
     this.warnerService.onRequestReceived(this.handleWarning, this);
   }
 
@@ -34,12 +34,10 @@ export class WarningComponent implements OnInit {
   }
 
   action(status) {
-    console.log(`Dialog result: ${status}`);
     this.handleClosure(status);
   }
 
   private handleClosure(status) {
-
     this.dialogOpened = false;
     this.warnerService.closed({ status, text: this.warning.input });
   }

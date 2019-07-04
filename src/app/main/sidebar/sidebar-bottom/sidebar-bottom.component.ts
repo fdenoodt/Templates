@@ -44,9 +44,9 @@ export class SidebarBottomComponent implements OnInit {
   }
 
   searchInput(): any {
-    const invalidElements = this.el.nativeElement.querySelectorAll('.searchField');
-    if (invalidElements.length > 0) {
-      return invalidElements[0];
+    const foundElements = this.el.nativeElement.querySelectorAll('.searchField');
+    if (foundElements.length > 0) {
+      return foundElements[0];
     }
   }
 

@@ -62,8 +62,6 @@ export class SidebarComponent implements OnInit {
     }
   }
 
-
-
   handleSelection({ dataItem, index }: any): void {
     this.selectedItem = dataItem;
 

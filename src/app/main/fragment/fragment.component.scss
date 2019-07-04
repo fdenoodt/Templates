@@ -7,14 +7,22 @@
   top: -2.3em;
   margin: 0.8em 2em;
   display:inline;
-  z-index: 2;
  }
 
  .fragment {
-   margin: 1em 1em;
-   background: #f6f6f6;
-   border: solid 1px #ededed;
-   padding-bottom: 0.5em;
+  margin: 1em 1em;
+  background: #f6f6f6;
+  border: solid 1px #ededed;
+  width: calc(100vw - (14em + 2em + 2px)); //14 = sidebar width, 2em = fragment margni, 2px = fragment border
+  padding: 0;
+  pre {
+    margin: 0;
+    padding: 0;
+    .code { 
+      background: white;
+      border: solid 1px #ededed;
+    }
+  }
  }
 
  .material-icons {
@@ -31,10 +39,14 @@
  }
 
  .is-invalid {
-  //  background: #ff6358;
    border: solid 1px #ff6358;
  }
 
  .warning {
    color: #ff6358;
  }
+
+ 
+
+  
+

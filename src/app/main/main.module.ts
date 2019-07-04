@@ -14,8 +14,22 @@ import { ToolBarModule } from '@progress/kendo-angular-toolbar';
 import { EditorModule } from '@progress/kendo-angular-editor';
 import { TreeViewModule } from '@progress/kendo-angular-treeview';
 import { InputsModule } from '@progress/kendo-angular-inputs';
-import { ClipboardModule } from 'ngx-clipboard';
 
+import { ClipboardModule } from 'ngx-clipboard';
+import { HighlightModule } from 'ngx-highlightjs';
+
+
+import xml from 'highlight.js/lib/languages/xml';
+import scss from 'highlight.js/lib/languages/scss';
+import typescript from 'highlight.js/lib/languages/typescript';
+
+export function hljsLanguages() {
+  return [
+    { name: 'typescript', func: typescript },
+    { name: 'scss', func: scss },
+    { name: 'xml', func: xml }
+  ];
+}
 
 @NgModule({
   declarations: [
@@ -32,7 +46,10 @@ import { ClipboardModule } from 'ngx-clipboard';
     TreeViewModule,
     InputsModule,
     ClipboardModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HighlightModule.forRoot({
+      languages: hljsLanguages
+    })
   ],
   exports: [
     SidebarBottomComponent, SidebarComponent, FragmentsComponent, FragmentComponent, MainRoutingModule

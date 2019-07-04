@@ -1,50 +1,76 @@
 <div class="fragment">
-
-  <form novalidate (ngSubmit)="submit()" [formGroup]="fragmentForm">
-    <div>
-      <kendo-textbox-container class="input" floatingLabel="Title">
-        <input kendoTextBox formControlName="title" [ngClass]="{'is-invalid': (fragmentForm?.get('title').touched ||
+  <div class="editable" *ngIf="editMode">
+    <form novalidate (ngSubmit)="submit()" [formGroup]="fragmentForm">
+      <div>
+        <kendo-textbox-container class="input" floatingLabel="Title">
+          <input kendoTextBox formControlName="title" [ngClass]="{'is-invalid': (fragmentForm?.get('title').touched ||
           fragmentForm?.get('title').dirty) &&
           !fragmentForm?.get('title').valid }">
-      </kendo-textbox-container>
+        </kendo-textbox-container>
+        <p class="input warning" *ngIf="fragmentForm.get('title').dirty && fragmentForm?.get('title').errors?.required">
+          Please enter a title.
+        </p>
+      </div>
 
-      <p class="input warning" *ngIf="fragmentForm.get('title').dirty && fragmentForm?.get('title').errors?.required">
-        Please enter a title.
+      <br>
+
+      <div>
+        <kendo-textbox-container class="input" floatingLabel="Content">
+          <textarea kendoTextArea formControlName="content" [ngClass]="{'is-invalid': (fragmentForm.get('content').touched ||
+            fragmentForm.get('content').dirty) &&
+            !fragmentForm.get('content').valid }" [autoSize]="true" (click)="copy($event)">
+          </textarea>
+          <br>
+          Preview:
+          <pre>
+            <code class="code input" [highlight]="fragment.content">
+            </code>
+          </pre>
+        </kendo-textbox-container>
+        <p class="input warning"
+          *ngIf="fragmentForm.get('content').dirty && fragmentForm.get('content').errors?.required">
+          Please enter the content.
+        </p>
+      </div>
+
+      <div *ngIf="copied" class="copied">
+        Copied
+      </div>
+
+      <br>
+
+      <p class="centerText">
+        <span *ngIf="synchronizing" class="k-i-loading k-icon centerText" style="font-size: 18px;">
+        </span>
       </p>
-    </div>
 
-    <br>
+      <br>
+    </form>
 
-    <div>
-      <kendo-textbox-container class="input" floatingLabel="Content">
-        <textarea kendoTextArea formControlName="content" [ngClass]="{'is-invalid': (fragmentForm.get('content').touched ||
-        fragmentForm.get('content').dirty) &&
-        !fragmentForm.get('content').valid }" [autoSize]="true" (click)="copy($event)"></textarea>
-      </kendo-textbox-container>
-      <p class="input warning"
-        *ngIf="fragmentForm.get('content').dirty && fragmentForm.get('content').errors?.required">
-        Please enter the content.
-      </p>
-    </div>
+    <button class="del" kendoButton [primary]="true" (click)="delete()">
+      <i class="material-icons">
+        delete
+      </i>
+    </button>
 
+    <button class="del" kendoButton [primary]="true" (click)="disbableEditMode()">
+      Back
+    </button>
+  </div>
 
-    <div *ngIf="copied" class="copied">
-      Copied
-    </div>
-
-    <br>
-
-    <p class="centerText">
-      <span *ngIf="synchronizing" class="k-i-loading k-icon centerText" style="font-size: 18px;">
-      </span>
+  <div class="uneditable" *ngIf="!editMode">
+    <p class="input">
+      {{fragment.title}}
     </p>
-
-    <br>
-  </form>
-  <button class="del" kendoButton [primary]="true" (click)="delete()">
-    <i class="material-icons">
-      delete
-    </i>
-  </button>
+    <p>
+      <button class="del" kendoButton [primary]="true" (click)="enableEditMode()">
+        Edit
+      </button>
+    </p>
+    <pre>
+      <code class="code input" [highlight]="fragment.content">
+      </code>
+    </pre>
+  </div>
 
 </div>

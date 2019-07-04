@@ -21,6 +21,12 @@ export class FragmentComponent implements OnInit, OnChanges {
   synchronizing: Boolean = false;
   fragmentForm: FormGroup;
   errorMessage: string;
+  editMode: Boolean = false;
+
+  highlight: string = `function myFunction() {
+    document.getElementById("demo1").innerHTML = "Hello there!";
+    document.getElementById("demo2").innerHTML = "How are you?";
+  }`;
 
   constructor(
     private _clipboardService: ClipboardService,
@@ -62,11 +68,19 @@ export class FragmentComponent implements OnInit, OnChanges {
     this.deleted.emit(this.fragment.id);
   }
 
+  enableEditMode(): void {
+    this.editMode = true;
+  }
+
+  disbableEditMode(): void {
+    this.editMode = false;
+  }
+
   submit(res): void {
     console.log(res);
 
     const title = res.title;
-    const content = res.title;
+    const content = res.content;
 
     this.fragment.title = title;
     this.fragment.content = content;

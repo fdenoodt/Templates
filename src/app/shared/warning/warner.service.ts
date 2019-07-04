@@ -9,6 +9,7 @@ export class WarnerService {
   listenForRequestsFunction: Function;
   listenForRequestDoneFunction: Function;
   warningComponent: any;
+  senderComponent: any;
   constructor() {
   }
 
@@ -25,13 +26,14 @@ export class WarnerService {
     this.warningComponent = warningComponent;
   }
 
-  onClose(func: Function) {
+  onClose(func: Function, senderComponent: any) {
     this.listenForRequestDoneFunction = func;
+    this.senderComponent = senderComponent;
   }
 
-  closed(status): void {
+  closed(res): void {
     if (this.listenForRequestDoneFunction != null) {
-      this.listenForRequestDoneFunction(status);
+      this.listenForRequestDoneFunction(res, this.senderComponent);
       this.listenForRequestDoneFunction = null;
     }
   }

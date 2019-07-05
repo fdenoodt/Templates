@@ -8,8 +8,9 @@ serve = args.some(val => val === '--serve');
 let isQuiting = false;
 
 function openWindow() {
-  if (win != undefined)
+  if (win !== undefined) {
     win.show();
+  }
 }
 
 function createWindow() {

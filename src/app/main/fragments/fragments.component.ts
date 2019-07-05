@@ -23,6 +23,7 @@ export class FragmentsComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(): void {
+    this.errorMessage = null;
     if (!this.found) {
       this.loadFragments();
     } else { // no need to load

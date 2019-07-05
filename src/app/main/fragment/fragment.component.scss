@@ -16,11 +16,13 @@
   width: calc(100vw - (14em + 2em + 2px)); //14 = sidebar width, 2em = fragment margni, 2px = fragment border
   padding: 0;
   pre {
-    margin: 0;
-    padding: 0;
+    padding: 0; margin: 0;
     .code { 
       background: white;
       border: solid 1px #ededed;
+    }
+    .displayPre {
+      width: calc(100% - 4em);
     }
   }
  }
@@ -30,12 +32,11 @@
  }
 
  .input {
-  margin: 0.5em 1.5em;
+  margin: 0.5em 1.5em; //1 = vertical, 2 = horizontal
  }
  
  .del {
   margin: 0.3em 1.7em;
-
  }
 
  .is-invalid {
@@ -46,7 +47,31 @@
    color: #ff6358;
  }
 
+ .previewPre {
+  margin: 0px;
+  padding: 0px;
+ }
+
+ .fragmentTitleWrapper {
+   .fragmentTitle {
+     margin-top: 0.5em;
+     float: left;
+   }
+   .fragmentDelete {
+     float: right;
+   }
+   .floatEnd {
+     clear: both;
+   }
+ }
+
+ .fragmentEditButtons {
+   button {
+     height: 2em;
+   }
  
-
-  
-
+   .remove {
+    width: calc(30% - 2px) ;
+  }
+  .ok { width: calc(70% - 2px);}
+ }

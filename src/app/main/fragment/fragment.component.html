@@ -18,12 +18,12 @@
         <kendo-textbox-container class="input" floatingLabel="Content">
           <textarea kendoTextArea formControlName="content" [ngClass]="{'is-invalid': (fragmentForm.get('content').touched ||
             fragmentForm.get('content').dirty) &&
-            !fragmentForm.get('content').valid }" [autoSize]="true" (click)="copy($event)">
+            !fragmentForm.get('content').valid }" [autoSize]="true">
           </textarea>
           <br>
           Preview:
-          <pre>
-            <code class="code input" [highlight]="fragment.content">
+          <pre class="previewPre">
+            <code class="code" [highlight]="fragment.content">
             </code>
           </pre>
         </kendo-textbox-container>
@@ -33,13 +33,7 @@
         </p>
       </div>
 
-      <div *ngIf="copied" class="copied">
-        Copied
-      </div>
-
-      <br>
-
-      <p class="centerText">
+      <p class="centerText" style="position: absolute">
         <span *ngIf="synchronizing" class="k-i-loading k-icon centerText" style="font-size: 18px;">
         </span>
       </p>
@@ -47,30 +41,40 @@
       <br>
     </form>
 
-    <button class="del" kendoButton [primary]="true" (click)="delete()">
-      <i class="material-icons">
-        delete
-      </i>
-    </button>
-
-    <button class="del" kendoButton [primary]="true" (click)="disbableEditMode()">
-      Back
-    </button>
+    <div class="fragmentEditButtons input" fxLayout="row">
+      <button fxFlex="fill" fxFill class="ok" kendoButton [primary]="false" (click)="disbableEditMode()">
+          <span class="k-icon k-i-arrow-chevron-left"></span>
+        </button>
+        
+      <button class="remove" kendoButton [primary]="true" (click)="delete()">
+        <span class="k-icon k-i-delete"></span>
+      </button>
+    </div>
   </div>
 
   <div class="uneditable" *ngIf="!editMode">
-    <p class="input">
-      {{fragment.title}}
-    </p>
-    <p>
-      <button class="del" kendoButton [primary]="true" (click)="enableEditMode()">
+    <div class="input fragmentTitleWrapper">
+      <!-- class="input" -->
+      <div class="fragmentTitle">
+        {{fragment.title}}
+      </div>
+      <button class="fragmentDelete" kendoButton [primary]="true" (click)="enableEditMode()">
         Edit
       </button>
-    </p>
+      <span class="floatEnd"></span>
+      <br>
+    </div>
     <pre>
-      <code class="code input" [highlight]="fragment.content">
+      <code class="code input displayPre" [highlight]="fragment.content" (click)="copy($event)">
       </code>
     </pre>
+
+    <div class="wrapper" style="position: absolute; text-align: right;">
+      <div *ngIf="copied" class="copied">
+        Copied
+      </div>
+    </div>
+
   </div>
 
 </div>

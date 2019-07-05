@@ -14,8 +14,11 @@ function openWindow() {
 }
 
 function createWindow() {
-
-  trayIcon = new Tray(path.join(__dirname, '/src/assets/img.png'));
+  if (serve) {
+    trayIcon = new Tray(path.join(__dirname, '/src/assets/img.png'));
+  } else {
+    trayIcon = new Tray(path.join(__dirname, '/dist/assets/img.png'));
+  }
   trayIcon.on('click', openWindow);
   const trayMenu = Menu.buildFromTemplate([
     {

@@ -1,5 +1,5 @@
 {
-  "productName": "angular-electron",
+  "productName": "Templates",
   "directories": {
     "output": "release/"
   },
@@ -22,7 +22,8 @@
   "win": {
     "icon": "dist",
     "target": [
-      "portable"
+      "portable",
+      "msi"
     ]
   },
   "mac": {

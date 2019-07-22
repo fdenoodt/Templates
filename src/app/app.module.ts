@@ -5,7 +5,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { StartComponent } from './start/start.component';
-import { SignInComponent } from './auth/sign-in/signin.component';
 import { MainComponent } from './main/main.component';
 
 import { MainModule } from './main/main.module';
@@ -20,7 +19,6 @@ import { WarnerService } from './shared/warning/warner.service';
   declarations: [
     AppComponent,
     StartComponent,
-    SignInComponent,
     MainComponent
   ],
   imports: [

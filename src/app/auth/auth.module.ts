@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { AuthRoutingModule } from './auth-routing.module';
+import { SignInComponent } from './sign-in/signin.component';
 import { RegisterComponent } from './register/register.component';
 import { FormComponent } from './shared/form/form.component';
 
@@ -14,11 +15,11 @@ import { TreeViewModule } from '@progress/kendo-angular-treeview';
 import { InputsModule } from '@progress/kendo-angular-inputs';
 
 import { ClipboardModule } from 'ngx-clipboard';
-
 @NgModule({
   declarations: [
     RegisterComponent,
-    FormComponent
+    FormComponent, 
+    SignInComponent
   ],
   imports: [
     CommonModule,
@@ -33,7 +34,8 @@ import { ClipboardModule } from 'ngx-clipboard';
     AuthRoutingModule
   ],
   exports: [
-    AuthRoutingModule
+    AuthRoutingModule,
+    SignInComponent
   ]
 })
 export class AuthModule { }

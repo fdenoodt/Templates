@@ -1,1 +1,12 @@
-form
+<form class="formContainer" fxLayout="column" fxLayoutAlign="space-around center" (ngSubmit)="submit()"
+  [formGroup]="form">
+  <div>
+    <input kendoTextBox placeholder="Name" formControlName="name" />
+  </div>
+  <div>
+    <input type="password" kendoTextBox placeholder="Password" formControlName="password" />
+  </div>
+  <div>
+    <button kendoButton type="submit" [disabled]="!form.valid">Submit</button>
+  </div>
+</form>

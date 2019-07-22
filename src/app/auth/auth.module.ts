@@ -14,7 +14,7 @@ import { EditorModule } from '@progress/kendo-angular-editor';
 import { TreeViewModule } from '@progress/kendo-angular-treeview';
 import { InputsModule } from '@progress/kendo-angular-inputs';
 
-import { ClipboardModule } from 'ngx-clipboard';
+import { FlexLayoutModule } from '@angular/flex-layout';
 @NgModule({
   declarations: [
     RegisterComponent,
@@ -29,7 +29,7 @@ import { ClipboardModule } from 'ngx-clipboard';
     EditorModule,
     TreeViewModule,
     InputsModule,
-    ClipboardModule,
+    FlexLayoutModule,
     ReactiveFormsModule,
     AuthRoutingModule
   ],

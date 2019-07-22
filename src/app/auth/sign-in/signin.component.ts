@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormModel } from '../shared/form/form.model';
 
 @Component({
   selector: 'app-signin',
@@ -10,6 +11,11 @@ export class SignInComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+  }
+
+  onSubmit($event: FormModel) {
+    console.log($event);
+
   }
 
 }

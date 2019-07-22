@@ -85,7 +85,7 @@
   },
   "dependencies": {
     "@angular/animations": "^8.0.3",
-    "@angular/cdk": "^8.0.1",
+    "@angular/cdk": "^8.1.1",
     "@angular/flex-layout": "^8.0.0-beta.26",
     "@progress/kendo-angular-buttons": "^5.0.0",
     "@progress/kendo-angular-common": "^1.0.0",

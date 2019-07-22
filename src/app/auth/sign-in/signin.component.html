@@ -1,7 +1,14 @@
-<p>
-  signin works!
-</p>
+<h1>
+  Sign in
+</h1>
 
-<a [routerLink]="['/register']">
+<div fxLayout="row" jkfda="lol" fxLayoutAlign="space-around center">
+    <div fxFlex="25em">
+      <app-form (onSubmit)="onSubmit($event)">
+      </app-form>
+    </div>
+  </div>
+
+<a [routerLink]="['/register']" fxLayoutAlign="center">
   Register
 </a>

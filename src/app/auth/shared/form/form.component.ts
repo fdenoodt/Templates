@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { FormModel } from './form.model';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-form',
@@ -7,9 +9,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FormComponent implements OnInit {
 
-  constructor() { }
+  @Input() name = '';
+  @Input() password = '';
+  @Output() onSubmit: EventEmitter<FormModel> = new EventEmitter<FormModel>();
+
+  form: FormGroup;
+  errorMessage: string;
+
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
+    this.form = this.fb.group({
+      name: [this.name, [Validators.required]],
+      password: [this.password, [Validators.required]]
+    })
+  }
+
+  submit() {
+    this.onSubmit.emit({
+      name: (this.form.value.name),
+      password: (this.form.value.password)
+    })
   }
 
 }

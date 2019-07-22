@@ -5,15 +5,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { StartComponent } from './start/start.component';
-import { SignInComponent } from './signin/signin.component';
+import { SignInComponent } from './auth/sign-in/signin.component';
 import { MainComponent } from './main/main.component';
 
 import { MainModule } from './main/main.module';
+import { AuthModule } from './auth/auth.module';
 import { SharedModule } from './shared/shared.module';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
-
 import { WarnerService } from './shared/warning/warner.service';
 
 @NgModule({
@@ -28,6 +28,7 @@ import { WarnerService } from './shared/warning/warner.service';
     AppRoutingModule,
     MainModule,
     SharedModule,
+    AuthModule,
 
     BrowserAnimationsModule,
     FlexLayoutModule,

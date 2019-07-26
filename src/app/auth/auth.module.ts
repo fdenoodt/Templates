@@ -7,6 +7,7 @@ import { SignInComponent } from './sign-in/signin.component';
 import { RegisterComponent } from './register/register.component';
 import { FormComponent } from './shared/form/form.component';
 
+import { AuthService } from './services/auth.service';
 
 import { GridModule } from '@progress/kendo-angular-grid';
 import { ToolBarModule } from '@progress/kendo-angular-toolbar';
@@ -15,10 +16,11 @@ import { TreeViewModule } from '@progress/kendo-angular-treeview';
 import { InputsModule } from '@progress/kendo-angular-inputs';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
+
 @NgModule({
   declarations: [
     RegisterComponent,
-    FormComponent, 
+    FormComponent,
     SignInComponent
   ],
   imports: [
@@ -36,6 +38,9 @@ import { FlexLayoutModule } from '@angular/flex-layout';
   exports: [
     AuthRoutingModule,
     SignInComponent
+  ],
+  providers: [
+    AuthService
   ]
 })
 export class AuthModule { }

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormModel } from '../shared/form/form.model';
+import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signin',
@@ -8,14 +10,19 @@ import { FormModel } from '../shared/form/form.model';
 })
 export class SignInComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
   }
 
   onSubmit($event: FormModel) {
-    console.log($event);
-
+    this.authService.signIn($event.name, $event.password).subscribe(user => {
+      if (user.token !== null && user.token !== undefined)
+        this.router.navigate(['/main'])
+    });
   }
 
 }

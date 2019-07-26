@@ -16,12 +16,13 @@ import { TreeViewModule } from '@progress/kendo-angular-treeview';
 import { InputsModule } from '@progress/kendo-angular-inputs';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { AuthGuard } from './guards/auth-guard.service';
 
 @NgModule({
   declarations: [
     RegisterComponent,
     FormComponent,
-    SignInComponent
+    SignInComponent,
   ],
   imports: [
     CommonModule,
@@ -33,14 +34,16 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     InputsModule,
     FlexLayoutModule,
     ReactiveFormsModule,
-    AuthRoutingModule
+    AuthRoutingModule,
   ],
   exports: [
     AuthRoutingModule,
-    SignInComponent
+    SignInComponent,
   ],
   providers: [
-    AuthService
+    AuthService,
+    AuthGuard
+
   ]
 })
 export class AuthModule { }

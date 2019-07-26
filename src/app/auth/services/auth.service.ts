@@ -86,4 +86,8 @@ export class AuthService {
     return field !== null && field !== undefined;
   }
 
+  public isAuthenticated(): boolean {
+    return this.exists(this.currentUser) && this.exists(this.currentUser.token);
+  }
+
 }

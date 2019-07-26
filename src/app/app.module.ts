@@ -14,6 +14,9 @@ import { SharedModule } from './shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { WarnerService } from './shared/warning/warner.service';
+import { AuthGuard } from './auth/guards/auth-guard.service';
+import { AuthService } from './auth/services/auth.service';
+
 
 @NgModule({
   declarations: [
@@ -31,8 +34,11 @@ import { WarnerService } from './shared/warning/warner.service';
     BrowserAnimationsModule,
     FlexLayoutModule,
     HttpClientModule,
+
   ],
-  providers: [WarnerService],
+  providers: [
+    WarnerService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

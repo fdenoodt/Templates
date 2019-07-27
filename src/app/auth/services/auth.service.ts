@@ -9,9 +9,16 @@ import { catchError, retry, map, tap, mergeMap } from 'rxjs/operators';
 })
 export class AuthService {
 
-  private url = 'http://localhost/templates/';
-  private currentUser: User;
-  constructor(private http: HttpClient) { }
+  private _currentUser: User;
+  private base = 'http://localhost/templates/';
+
+  get currentUser(): User {
+    return this._currentUser;
+  }
+
+  constructor(
+    private http: HttpClient
+  ) { }
 
   post<T>(url: string, object: any, xTimes: number = 3): Observable<T> {
     const httpOptions = {
@@ -20,37 +27,43 @@ export class AuthService {
       })
     };
 
+    const currentUser: User = this.currentUser;
     const body: any = object;
-    if (this.exists(this.currentUser))
-      body.jwt = this.currentUser.token;
+    if (this.exists(currentUser))
+      body.jwt = currentUser.token;
 
-    return this.http.post<T>(url, body, httpOptions)
+    return this.http.post<T>(`${this.base}${url}`, body, httpOptions)
       .pipe(
         tap((data: any) => {
-          if (this.exists(data) && this.exists(data.jwt) && this.exists(this.currentUser))
-            this.currentUser.token = data.jwt;
+          if (this.exists(data) && this.exists(data.jwt) && this.exists(currentUser))
+            currentUser.token = data.jwt; // update token
         }),
         catchError(this.handleError),
         retry(xTimes)
       );
   }
 
+  get<T>(url: string, xTimes: number = 3): Observable<T[]> {
+    return this.http.get<T[]>(this.base + url).pipe(
+      catchError(this.handleError),
+      retry(xTimes)
+    )
+  }
+
   createUser(name: string, password: string): Observable<User> {
-    return this.post<any>(`${this.url}auth/create_user.php`, [{ name: name, password: password }])
+    return this.post<any>(`auth/create_user.php`, [{ name: name, password: password }])
       .pipe(
         mergeMap(data => {
           // todo: check if success
           if (this.exists(data)) {
             return this.signIn(name, password);
-            // return { name: name, token: data.jwt }
-
           }
         })
       )
   }
 
   signIn(name: string, password: string): Observable<User> {
-    return this.post<any>(`${this.url}/auth/login.php`, { name, password })
+    return this.post<any>(`auth/login.php`, { name, password })
       .pipe(
         map(data => {
           if (this.exists(data)) {
@@ -59,7 +72,7 @@ export class AuthService {
               token: data.jwt
             }
 
-            this.currentUser = currentUser;
+            this._currentUser = currentUser;
             return currentUser;
           }
           else {
@@ -89,5 +102,6 @@ export class AuthService {
   public isAuthenticated(): boolean {
     return this.exists(this.currentUser) && this.exists(this.currentUser.token);
   }
+
 
 }

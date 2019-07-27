@@ -6,6 +6,9 @@
   <div>
     <input type="password" kendoTextBox placeholder="Password" formControlName="password" />
   </div>
+  <div *ngIf="response != null && response.length > 0">
+    {{ response }}
+  </div>
   <div>
     <button kendoButton type="submit" [disabled]="!form.valid">Submit</button>
   </div>

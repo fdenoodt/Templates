@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
 
+  errorMessage: string;
   constructor(
     private authService: AuthService,
     private router: Router
@@ -22,6 +23,9 @@ export class RegisterComponent implements OnInit {
     this.authService.signIn($event.name, $event.password).subscribe(user => {
       if (user.token !== null && user.token !== undefined)
         this.router.navigate(['/main'])
+      else
+        this.errorMessage = 'Error, try again...';
+
     });
   }
 

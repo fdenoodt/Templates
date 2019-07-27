@@ -11,6 +11,7 @@ export class FormComponent implements OnInit {
 
   @Input() name = '';
   @Input() password = '';
+  @Input() response = '';
   @Output() onSubmit: EventEmitter<FormModel> = new EventEmitter<FormModel>();
 
   form: FormGroup;

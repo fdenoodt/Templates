@@ -1,9 +1,9 @@
 <h1>
-    Register
-  </h1>
+  Register
+</h1>
 <div fxLayout="row" jkfda="lol" fxLayoutAlign="space-around center">
   <div fxFlex="25em">
-    <app-form (onSubmit)="onSubmit($event)">
+    <app-form (onSubmit)="onSubmit($event)" [response]="errorMessage">
     </app-form>
   </div>
 </div>

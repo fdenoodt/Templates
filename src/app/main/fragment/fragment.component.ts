@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, OnChanges, EventEmitter, Output } from '@angular/core';
 import { IFragment } from '../fragment';
 import { ClipboardService } from 'ngx-clipboard';
-import { FragmentService } from '../fragment.service';
+import { FragmentService } from '../services/fragment.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { debounceTime } from 'rxjs/operators';
 
@@ -77,8 +77,6 @@ export class FragmentComponent implements OnInit, OnChanges {
   }
 
   submit(res): void {
-    console.log(res);
-
     const title = res.title;
     const content = res.content;
 
@@ -92,6 +90,10 @@ export class FragmentComponent implements OnInit, OnChanges {
       },
       error => this.errorMessage = <any>error // casting naar any
     );
+  }
+
+  tabPressed(): void {
+
   }
 
 }

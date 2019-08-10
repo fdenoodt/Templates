@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { IFragment } from '../fragment';
-import { FragmentService } from '../fragment.service';
+import { FragmentService } from '../services/fragment.service';
 import { IPage } from '../page';
 
 @Component({

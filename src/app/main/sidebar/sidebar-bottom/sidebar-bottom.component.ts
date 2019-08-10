@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, ElementRef } from '@angular/core';
-import { FragmentService } from '../../fragment.service';
+import { FragmentService } from '../../services/fragment.service';
 import { IFragment } from '../../fragment';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 

@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { FragmentService } from '../fragment.service';
+import { FragmentService } from '../services/fragment.service';
 import { IDirectory } from '../directory';
 import { IPage } from '../page';
 import { ITreeItem } from '../treeItem';
@@ -25,12 +25,7 @@ export class SidebarComponent implements OnInit {
   constructor(private fragmentsService: FragmentService, private warningService: WarnerService) { }
 
   ngOnInit() {
-    this.fragmentsService.getDictionariesAndPages().subscribe(
-      data => {
-        this.data = data;
-      },
-      error => this.errorMessage = <any>error // casting naar any
-    );
+    this.loadDirectoriesAndPages();
 
     const that = this;
     window.addEventListener('keydown', function (e) {
@@ -60,6 +55,22 @@ export class SidebarComponent implements OnInit {
         }
       );
     }
+  }
+
+  loadDirectoriesAndPages(): void {
+    this.errorMessage = 'Loading...'
+    this.fragmentsService.getDictionariesAndPages().subscribe(
+      data => {
+        this.errorMessage = '';
+        this.data = data;
+      },
+      error => this.errorMessage = <any>error // casting naar any
+    );
+  }
+
+  reconnect(): void {
+    this.errorMessage = '';
+    this.loadDirectoriesAndPages();
   }
 
   handleSelection({ dataItem, index }: any): void {

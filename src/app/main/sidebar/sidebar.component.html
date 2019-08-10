@@ -13,8 +13,10 @@
 </kendo-toolbar>
 
 <div class="sidebar">
-  <p fxLayoutAlign="center center" *ngIf="errorMessage != null">
+  <p fxLayoutAlign="center center" *ngIf="errorMessage != null && errorMessage.length > 0">
     {{ errorMessage }}
+    <br>
+    <button kendoButton (click)="reconnect()">Try again</button>
   </p>
 
   <kendo-treeview (focus)="focus()" (blur)="lostFocus()" [nodes]="data" textField="text" kendoTreeViewExpandable

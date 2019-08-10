@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../auth/services/auth.service';
 
 @Component({
   selector: 'app-start',
@@ -8,10 +9,14 @@ import { Router } from '@angular/router';
 })
 export class StartComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private authService: AuthService) { }
 
   ngOnInit() {
-    this.router.navigate(['/main'])
+    if (this.authService.isAuthenticated)
+      this.router.navigate(['/auth'])
+    else {
+      this.router.navigate(['/main'])
+    }
   }
 
 }

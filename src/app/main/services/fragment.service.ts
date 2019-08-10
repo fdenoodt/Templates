@@ -1,14 +1,14 @@
-import { IFragment } from './fragment';
-import { IDirectory } from './directory';
-import { IPage } from './page';
+import { IFragment } from '../fragment';
+import { IDirectory } from '../directory';
+import { IPage } from '../page';
 
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { tap } from 'rxjs/operators';
 import { map } from 'rxjs/operators';
-import { ITreeItem } from './treeItem';
-import { AuthService } from '../auth/services/auth.service';
+import { ITreeItem } from '../treeItem';
+import { AuthService } from '../../auth/services/auth.service';
 
 @Injectable({ providedIn: 'root' })
 export class FragmentService {
@@ -64,18 +64,19 @@ export class FragmentService {
 
 
   getDictionariesAndPages(): Observable<IDirectory[]> {
+    // return this.restService.get<IDirectory>(this.directories).pipe(
     return this.restService.get<IDirectory>(this.directories).pipe(
       tap(data => console.log('all:', data))
     )
   }
 
   getFragments(id: number): Observable<IFragment[]> {
-    return this.restService.get<IFragment>(`${this.fragments}?page_id=${id}`).pipe(
-    );
+    return this.restService.get<IFragment>(`${this.fragments}`, [{ name: 'page_id', value: id }]).pipe();
+    // return this.restService.get<IFragment>(`${this.fragments}?page_id=${id}`).pipe();
   }
 
   findFragmentsByText(keywords: string): Observable<IFragment[]> {
-    return this.restService.get<IFragment>(`findFragments.php?text=${keywords}`).pipe(
-    );
+    return this.restService.get<IFragment>(`findFragments.php`, [{ name: 'text', value: keywords }]).pipe();
+    // return this.restService.get<IFragment>(`findFragments.php?text=${keywords}`).pipe();
   }
 }

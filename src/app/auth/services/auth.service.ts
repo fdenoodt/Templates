@@ -3,6 +3,7 @@ import { Observable, of, throwError } from 'rxjs';
 import { User } from './user.model';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { catchError, retry, map, tap, mergeMap } from 'rxjs/operators';
+import { UrlParameter } from './url-parameter.model';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +11,7 @@ import { catchError, retry, map, tap, mergeMap } from 'rxjs/operators';
 export class AuthService {
 
   private _currentUser: User;
-  private base = 'http://localhost/templates/';
+  private base = 'http://ofabian.be/templates/';
 
   get currentUser(): User {
     return this._currentUser;
@@ -18,7 +19,11 @@ export class AuthService {
 
   constructor(
     private http: HttpClient
-  ) { }
+  ) {
+    const strUser = localStorage.getItem('templates token');
+    if (strUser !== undefined)
+      this.setCurrentUser(JSON.parse(strUser));
+  }
 
   post<T>(url: string, object: any, xTimes: number = 3): Observable<T> {
     const httpOptions = {
@@ -43,8 +48,17 @@ export class AuthService {
       );
   }
 
-  get<T>(url: string, xTimes: number = 3): Observable<T[]> {
-    return this.http.get<T[]>(this.base + url).pipe(
+  get<T>(url: string, params: UrlParameter[] = [], xTimes: number = 3): Observable<T[]> {
+    let urlParameters: string = '?';
+
+    if (this.exists(this.currentUser))
+      urlParameters += `jwt=${this.currentUser.token}&`;
+
+    params.forEach((parameter: UrlParameter) => {
+      urlParameters += `${parameter.name}=${parameter.value}`
+    });
+
+    return this.http.get<T[]>(this.base + url + urlParameters).pipe(
       catchError(this.handleError),
       retry(xTimes)
     )
@@ -67,12 +81,12 @@ export class AuthService {
       .pipe(
         map(data => {
           if (this.exists(data)) {
-            const currentUser = {
+            const currentUser: User = {
               name: name,
               token: data.jwt
             }
 
-            this._currentUser = currentUser;
+            this.setCurrentUser(currentUser);
             return currentUser;
           }
           else {
@@ -80,6 +94,11 @@ export class AuthService {
           }
         })
       )
+  }
+
+  private setCurrentUser(user: User): void {
+    this._currentUser = user;
+    localStorage.setItem('templates token', JSON.stringify(user));
   }
 
   handleError(handleError: HttpErrorResponse) {

@@ -21,7 +21,6 @@ export class FragmentComponent implements OnInit, OnChanges {
   synchronizing: Boolean = false;
   fragmentForm: FormGroup;
   errorMessage: string;
-  editMode: Boolean = false;
 
   highlight: string = `function myFunction() {
     document.getElementById("demo1").innerHTML = "Hello there!";
@@ -69,11 +68,11 @@ export class FragmentComponent implements OnInit, OnChanges {
   }
 
   enableEditMode(): void {
-    this.editMode = true;
+    this.fragment.editMode = true;
   }
 
   disbableEditMode(): void {
-    this.editMode = false;
+    this.fragment.editMode = false;
   }
 
   submit(res): void {

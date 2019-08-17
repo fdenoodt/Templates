@@ -47,6 +47,8 @@ export class FragmentsComponent implements OnInit, OnChanges {
     };
     this.fragmentsService.addFragment(frag, this.page.id).subscribe(
       data => {
+        const newFragment: IFragment = data;
+        newFragment.editMode = true;
         this.fragments.push(data);
       },
       error => this.errorMessage = <any>error // casting naar any

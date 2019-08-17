@@ -34,7 +34,7 @@ export class AuthService {
 
     const currentUser: User = this.currentUser;
     const body: any = object;
-    if (this.exists(currentUser))
+    if (this.exists(currentUser) && typeof body === 'object')
       body.jwt = currentUser.token;
 
     return this.http.post<T>(`${this.base}${url}`, body, httpOptions)
